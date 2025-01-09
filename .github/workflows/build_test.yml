@@ -10,12 +10,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout Pull Request Branch
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0 # Ensures the full commit history is fetched for proper testing
-        
+    steps:        
     - uses: actions/checkout@v4
     - name: Set up JDK 21
       uses: actions/setup-java@v4
