@@ -22,7 +22,6 @@ public class Tarea1Application {
 
 	@GetMapping
 	public String getTask1() {
-		System.out.println(serviceTask1.getTask1());
 		return serviceTask1.getTask1();
 	}
 
