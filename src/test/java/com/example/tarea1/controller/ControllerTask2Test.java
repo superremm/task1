@@ -11,6 +11,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.List;  // Unused import
 import java.util.Map;   // Unused import
 
+import static java.lang.Thread.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -90,8 +91,8 @@ class ControllerTask2Test {
         // Empty method - flagged as a code smell
     }
 
-    @Test
-    void testDeprecatedMethod() throws Exception {
-        Thread.stop(); // Deprecated method
-    }
+//    @Test
+//    void testDeprecatedMethod() throws Exception {
+//        Thread.stop(); // Deprecated method
+//    }
 }
