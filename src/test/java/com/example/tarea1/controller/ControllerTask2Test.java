@@ -68,4 +68,7 @@ class ControllerTask2Test {
         verify(serviceTask2, times(1)).delete();
     }
 
+    @Test
+    void testDelete2() throws Exception {
+    }
 }
