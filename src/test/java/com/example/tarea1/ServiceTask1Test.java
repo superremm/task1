@@ -3,7 +3,7 @@ package com.example.tarea1;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ServiceTask1Test {
+class ServiceTask1Test {
 
     private final ServiceTask1 serviceTask1 = new ServiceTask1();
 
