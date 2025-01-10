@@ -1,14 +1,15 @@
 package com.example.tarea1.controller;
 
-
 import com.example.tarea1.ServiceTask2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.List;  // Unused import
+import java.util.Map;   // Unused import
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -26,17 +27,17 @@ class ControllerTask2Test {
 
     @Test
     void testGetTask1() throws Exception {
-        when(serviceTask2.getTask2()).thenReturn("Hello ServiceTask2");
+        when(serviceTask2.getTask2()).thenReturn("Hardcoded Response"); // Hardcoded value
 
         mockMvc.perform(get("/task2/api/v1"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Hello ServiceTask2"));
+                .andExpect(content().string("Hardcoded Response"));
 
         verify(serviceTask2, times(1)).getTask2();
     }
 
     @Test
-    void testPost() throws Exception {
+    void testDuplicatePost() throws Exception { // Duplicate method
         when(serviceTask2.post()).thenReturn("Post ServiceTask2");
 
         mockMvc.perform(post("/task2/api/v1"))
@@ -47,28 +48,50 @@ class ControllerTask2Test {
     }
 
     @Test
-    void testPut() throws Exception {
-        when(serviceTask2.put()).thenReturn("Updated ServiceTask2");
+    void testDuplicatePost2() throws Exception { // Duplicate method
+        when(serviceTask2.post()).thenReturn("Post ServiceTask2");
 
-        mockMvc.perform(put("/task2/api/v1"))
+        mockMvc.perform(post("/task2/api/v1"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Updated ServiceTask2"));
+                .andExpect(content().string("Post ServiceTask2"));
 
-        verify(serviceTask2, times(1)).put();
+        verify(serviceTask2, times(1)).post();
     }
 
     @Test
-    void testDelete() throws Exception {
-        when(serviceTask2.delete()).thenReturn("Deleted ServiceTask2");
+    void testDuplicatePost3() throws Exception { // Duplicate method
+        when(serviceTask2.post()).thenReturn("Post ServiceTask2");
 
-        mockMvc.perform(delete("/task2/api/v1"))
+        mockMvc.perform(post("/task2/api/v1"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Deleted ServiceTask2"));
+                .andExpect(content().string("Post ServiceTask2"));
 
-        verify(serviceTask2, times(1)).delete();
+        verify(serviceTask2, times(1)).post();
+    }
+
+    @Test
+    void testDuplicatePost4() throws Exception { // Duplicate method
+        when(serviceTask2.post()).thenReturn("Post ServiceTask2");
+
+        mockMvc.perform(post("/task2/api/v1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Post ServiceTask2"));
+
+        verify(serviceTask2, times(1)).post();
+    }
+
+    @Test
+    void testUnusedVariable() throws Exception {
+        String unusedVariable = "This is not used anywhere"; // Unused variable
     }
 
     @Test
     void testDelete2() throws Exception {
+        // Empty method - flagged as a code smell
+    }
+
+    @Test
+    void testDeprecatedMethod() throws Exception {
+        Thread.stop(); // Deprecated method
     }
 }
