@@ -37,7 +37,12 @@ public class Tarea1Application {
 
 	@DeleteMapping("")
 	public ResponseEntity<String> delete() {
+		funtionloca(1,2,3,4,5);
 		return ResponseEntity.ok(serviceTask1.delete());
+	}
+
+	private void funtionloca(int a, int b, int c, int d, int e) {
+		System.out.println(a + b + c + d + e);
 	}
 
 }
