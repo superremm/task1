@@ -69,4 +69,52 @@ class Tarea1ApplicationIntegrationTest {
 
         verify(serviceTask1, times(1)).delete();
     }
+
+    @Test
+    void testDelete2() throws Exception {
+        when(serviceTask1.delete()).thenReturn("Delete response");
+
+        mockMvc.perform(delete("/task1/api/v1")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Delete response"));
+
+        verify(serviceTask1, times(1)).delete();
+    }
+
+    @Test
+    void testDelete3() throws Exception {
+        when(serviceTask1.delete()).thenReturn("Delete response");
+
+        mockMvc.perform(delete("/task1/api/v1")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Delete response"));
+
+        verify(serviceTask1, times(1)).delete();
+    }
+
+    @Test
+    void testDelete4() throws Exception {
+        when(serviceTask1.delete()).thenReturn("Delete response");
+
+        mockMvc.perform(delete("/task1/api/v1")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Delete response"));
+
+        verify(serviceTask1, times(1)).delete();
+    }
+
+    @Test
+    void testDelete5() throws Exception {
+        when(serviceTask1.delete()).thenReturn("Delete response");
+
+        mockMvc.perform(delete("/task1/api/v1")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Delete response"));
+
+        verify(serviceTask1, times(1)).delete();
+    }
 }
