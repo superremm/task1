@@ -21,20 +21,36 @@ jobs:
           docker tag tarea1:${{ github.sha}} ${{ secrets.ECR_REPOSITORY_URI}}/tarea1:latest
 
       # Step 3: Push Docker Image to ECR
-      - name: Log in to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
 
+      # Set up AWS Credentials
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Log in to Amazon ECR
+      - name: Log in to Amazon ECR
+        run: |
+          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.ECR_REPOSITORY_URI }}
+
+      # Push image to Amazon ECR
       - name: Push to ECR
         run: |
-          docker tag my-image:${{ github.sha }} ${{ secrets.AWS_ECR_URI }}/my-image:${{ github.sha }}
-          docker push ${{ secrets.AWS_ECR_URI }}/my-image:${{ github.sha }}
+          docker push ${{ secrets.AWS_ECR_URI }}/tarea1:${{ github.sha }}
+        env:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
-      # Step 4: Deploy to AWS ECS
-      - name: Deploy to AWS ECS
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-        with:
-          task-definition: ecs-task-def.json
-          service: my-ecs-service
-          cluster: my-cluster
-          wait-for-service-stability: true
+#      # Step 4: Deploy to AWS ECS
+#      - name: Deploy to AWS ECS
+#        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+#        with:
+#          task-definition: ecs-task-def.json
+#          service: my-ecs-service
+#          cluster: my-cluster
+#          wait-for-service-stability: true
+          
+          
