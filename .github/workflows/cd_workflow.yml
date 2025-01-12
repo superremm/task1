@@ -36,10 +36,8 @@ jobs:
       # Push image to Amazon ECR
       - name: Push to ECR
         run: |
-          IMAGE_TAG=${{ github.sha }}
           REPOSITORY_URI=${{ secrets.ECR_REPOSITORY_URI }}
           docker push REPOSITORY_URI:latest
-          docker push REPOSITORY_URI:IMAGE_TAG
 #        env:
 #          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
 #          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
