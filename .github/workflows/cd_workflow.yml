@@ -23,19 +23,19 @@ jobs:
       # Step 3: Push Docker Image to ECR
       # Log in to Amazon ECR
       - name: Login to Amazon ECR
-        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
-        with:
-          mask-password: 'false'
 
       # Push image to Amazon ECR
       - name: Push to ECR
         run: |
-          docker push  ${{ secrets.ECR_REPOSITORY_URI }}:latest
-        env:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          IMAGE_TAG=${{ github.sha }}
+          REPOSITORY_URI=${{ secrets.ECR_REPOSITORY_URI }}
+          docker push REPOSITORY_URI:latest
+          docker push REPOSITORY_URI:IMAGE_TAG
+#        env:
+#          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#          aws-region: ${{ secrets.AWS_REGION }}
 
 #      # Step 4: Deploy to AWS ECS
 #      - name: Deploy to AWS ECS
